@@ -14,6 +14,7 @@ requires = [
     'pyramid_debugtoolbar',
     'substanced',
     'pyramid_tm==2.3',
+    'pyramid_retry',
     'waitress',
     'scikit-optimize',
     'matplotlib',
