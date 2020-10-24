@@ -1,0 +1,51 @@
+.bg-light .navbar-brand {
+background-color: #043264;
+color : rgba(255,255,255,1);
+}
+
+.navbar-light .navbar-brand:focus,.navbar-light .navbar-brand:hover {
+ color:rgba(255,255,255,.5)
+}
+
+.bg-light {
+ background-color:#043264!important
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link{
+ color:rgba(255,255,255,1)
+}
+
+
+
+.navbar-light .navbar-nav .navbar-text {
+ color:rgba(255,255,255,1)
+}
+
+.navbar-light .navbar-nav .nav-link {
+ color:rgba(255,255,255,1)
+}
+.navbar-light .navbar-nav .nav-link:focus,.navbar-light .navbar-nav .nav-link:hover {
+ color:rgba(255,255,255,.5)
+}
+
+.deform-form-buttons .btn-primary {
+   background-color: rgba(4,50,100,1);
+      color: rgba(255,255,255,1);
+}
+
+.deform-form-buttons .btn-primary:hover {
+   background-color: rgba(2,87,183,1);
+      color: rgba(255,255,255,1);
+}
+
+.container .col-sm .btn-primary {
+   background-color: rgba(4,50,100,1);
+      color: rgba(255,255,255,1);
+  
+}
+
+.container .col-sm .btn-primary:hover {
+   background-color: rgba(2,87,183,1);
+      color: rgba(255,255,255,1);
+  
+}

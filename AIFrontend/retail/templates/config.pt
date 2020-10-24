@@ -1,0 +1,141 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      metal:use-macro="master">
+<head>
+ <title metal:fill-slot="head-title">${context.__parent__.name + ' config page'}</title>
+</head>
+<body>
+
+
+	<div metal:fill-slot="body-content">
+	
+		<div class="row">
+			<div class=col-sm>
+			<h1>${context.__parent__.name + ' config page'}</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div tal:condition="not:configured" class="col-sm">
+			<h3>Add new variable</h3>
+			Add new variable to the optimizer to the model
+			<form action="" method="POST">
+				<label>Variable type</label><br>
+				<select name="variable_type">
+					<option value="valvar">Value Variable</option>
+					<option value="catvar">Categorical Variable</option>
+				</select>
+				<input type="submit" value="Add">
+			</form>
+			</div>
+			<div class="col-sm">
+				<h3>Model for optimizer</h3>
+				<table>
+				<tr>
+					<th>Variable Title</th>
+					<th>Order</th>
+					<th>Type</th>
+					<th>Value</th>
+					<th>Action</th>
+				</tr>
+				<tr tal:repeat="var variables">
+     				<td tal:condition="request.registry.content.istype(var, 'ValVar')" rowspan="2">${var.name}</td>
+					<td tal:condition="request.registry.content.istype(var, 'ValVar')" rowspan="2">${var.order}</td>
+					<td tal:condition="request.registry.content.istype(var, 'ValVar')">Min val</td>
+					<td tal:condition="request.registry.content.istype(var, 'ValVar')">${var.minval}</td>
+					<td tal:condition="request.registry.content.istype(var, 'ValVar')" rowspan="2"> 
+					<form tal:condition="not:configured" action="" method="POST">
+						<input type="hidden" value="${var.name}" name="rem_id">
+						<button type="submit" class="btn btn-link" name="Delete">
+    						<span>Delete</span>
+						</button>
+ 
+					</form>
+					</td>
+					<tr>
+					<td tal:condition="request.registry.content.istype(var, 'ValVar')">Max val</td>
+					<td tal:condition="request.registry.content.istype(var, 'ValVar')">${var.maxval}</td>
+					</tr>
+	
+					<td tal:condition="request.registry.content.istype(var, 'CatVar')">${var.name}</td>
+					<td tal:condition="request.registry.content.istype(var, 'CatVar')">${var.order}</td>
+					<td tal:condition="request.registry.content.istype(var, 'CatVar')">Options</td>
+					<td tal:condition="request.registry.content.istype(var, 'CatVar')">${var.options}</td>
+					<td tal:condition="request.registry.content.istype(var, 'CatVar')">
+					<form tal:condition="not:configured" action="" method="POST">
+						<input type="hidden" value="${var.name}" name="rem_id">
+						<button type="submit" class="btn btn-link" name="Delete">
+    						<span>Delete</span>
+						</button>
+					</form>
+					</td>
+				</tr> 
+				</table>	
+			</div>
+			<div tal:condition="configured" class="col-sm">
+			<h3>Optimizer hyper parameters</h3>
+				<table>
+					<tr>
+						<td> Base estimator</td>
+						<td>${context.base_estimator}</td>
+					</tr>
+					<tr>
+						<td>acquisition function</td>
+						<td>${context.acq_func}</td>
+					</tr>
+					<tr>
+						<td>Number of initial points</td>
+						<td>${context.n_initial_points}</td>
+					</tr>
+					<tr>
+						<td>Kappa</td>
+						<td>${context.kappa}</td>
+					</tr>
+					<tr>
+						<td>Xi</td>
+						<td>${context.xi}</td>
+					</tr>
+				</table>
+			</div>
+			<div tal:condition="not:configured" class="col-sm">
+				<h3>Configure optimizer</h3>
+				<div tal:content="structure params_form">
+				
+				</div>
+			</div>
+			<div tal:condition="configured" class="col-sm">
+				<h3>Reinitiate kernel</h3>
+				<form>
+				        <button
+              id="deformConfigure"
+              name="Reinitiate"
+              type="submit"
+              class="btn btn-primary"
+              value="Reinitiate">
+          
+          Reinitiate
+        </button>
+				</form>
+			</div>
+						<div tal:condition="configured" class="col-sm">
+				<h3>Reinitiate report</h3>
+				<form>
+				        <button
+              id="deformConfigure"
+              name="Reinitiate_report"
+              type="submit"
+              class="btn btn-primary"
+              value="Reinitiate">
+          
+          Reinitiate
+        </button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
+	
+
+
+
+</body>
+</html>

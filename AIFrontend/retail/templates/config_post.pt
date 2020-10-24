@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      metal:use-macro="master">
+<head>
+ <title metal:fill-slot="head-title">${'Add ' + vartype}</title>
+</head>
+<body>
+
+
+	<div metal:fill-slot="body-content">
+		<h2>${'Add ' + vartype}</h2>
+	
+		<div tal:content="structure form">
+		</div>
+	</div>
+
+
+	
+</body>
+</html>

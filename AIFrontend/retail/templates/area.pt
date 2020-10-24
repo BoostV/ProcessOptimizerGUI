@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      metal:use-macro="master">
+<head>
+ <title metal:fill-slot="head-title">${context.name}</title>
+</head>
+<body>
+<h1 metal:fill-slot="body-title">${context.name}</h1>
+
+	<div metal:fill-slot="body-content">
+	<h4>Area: ${context.description}</h4>
+	<p><b>Select an experiment from the list below</b></p>
+	<div tal:repeat="experiment experiments">
+		<a href="${request.resource_url(experiment)}">${experiment.name}</a>
+	</div>
+
+
+	</div> 
+</body>
+</html>

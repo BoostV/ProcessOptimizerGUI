@@ -1,0 +1,9 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      metal:use-macro="master">
+<head>
+ <title metal:fill-slot="head-title">Diller	</title>
+</head>
+<body>
+ <h1 metal:fill-slot="body-title">Diller2</h1>
+</body>
+</html>

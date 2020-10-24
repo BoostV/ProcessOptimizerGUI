@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      metal:use-macro="master">
+<head>
+ <title metal:fill-slot="head-title">${context.name}</title>
+</head>
+<body>
+	<div metal:fill-slot="body-content">
+		<div class="row">
+			<div class=col-sm>
+				<h1>${'Experiment report for: ' + context.name}</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm">
+				<h3>Data points added</h3>
+				<div>
+				<table class="table">
+				  <tr>
+				    <th scope="col" tal:repeat="i input_header">${i}</th>
+				  </tr>
+				  <tr tal:repeat="n input_values">
+				    <td scope="col" tal:repeat="k n">${k}</td>   
+				  </tr>
+				</table>
+				</div>
+			</div>
+			<div class="col-sm" tal:condition="exists:exp_min">
+				<h3>Expected Minimum</h3>
+				<span tal:repeat="item exp_min['value']">
+				<b>${item[0]}</b><br>
+				${item[1]}<br>
+				</span>
+				<span>
+				<b>Best result</b><br>
+				${exp_min['result']}
+				</span>
+				</div>
+		
+			</div>
+			
+			<div class="row">
+			<div class="col-sm">
+				<h3>Objective plots</h3>
+				<div>
+				<img alt="" src="${request.resource_url(context, 'objective_plot')}">
+				</div>
+		
+			</div>
+			<div class="col-sm">
+				<h3>Convergence plot</h3>
+				<div>
+				<img alt="" src="${request.resource_url(context, 'convergence_plot')}">
+				</div>
+		
+			</div>
+
+
+		</div>
+		
+
+	</div>
+
+
+	
+</body>
+</html>

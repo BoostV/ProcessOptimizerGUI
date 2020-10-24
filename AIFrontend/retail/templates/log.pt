@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      metal:use-macro="master">
+<head>
+ <title metal:fill-slot="head-title">jpjop</title>
+</head>
+<body>
+
+	<div metal:fill-slot="body-content">
+	<h3>Log entries for ${context.__parent__.name}</h3>
+		<div tal:repeat="logentry logs">
+		<p>${logentry.name} --- ${logentry.description}</p>
+		</div>
+
+	</div> 
+</body>
+</html>

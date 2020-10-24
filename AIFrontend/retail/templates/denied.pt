@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      metal:use-macro="master">
+<head>
+ <title metal:fill-slot="head-title">AI Platform</title>
+</head>
+<body>
+<h1 metal:fill-slot="body-title">AI Platform</h1>
+
+	<div metal:fill-slot="body-content">
+	<p tal:condition="request.authenticated_userid"><b>You have insufficient permission to access the following resource <br> ${request.referer} </b><br>
+	<a href="${request.referer}">Back</a>
+	</p>
+	
+	
+	<p tal:condition="not:request.authenticated_userid">
+	<H3>ProcessOptimizer GUI </H3>
+	The aim of this project is to provide an easy way to use Bayesian optimization in the daily work, 
+	Normally this tool would require some programming skills, however with this graphical user interface (GUI) we try to expose this 
+	powerful tool while removing the requirement for programming.
+	
+	
+	
+	<H3>Changes for this version</H3>
+	<ul>
+	<li>Changed creation of Optimizer kernel to use a shorter length scale when using Gaussian processes</li>
+	<li>Created button in config section allowing users to initialize experiment with new kernel</li>
+	<li>For reproducibility numpy.random.seed have been fixed to 42</li>
+	<li>Updated front page with project info</li>
+	<li>updated report to show dependence instead of partial dependence</li>
+	<li>Removed autocomplete on add data form</li>
+	</ul>
+	
+	
+	
+	
+	</p>
+		
+
+	</div> 
+</body>
+</html>

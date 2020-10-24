@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      metal:use-macro="master">
+<head>
+ <title metal:fill-slot="head-title">AI Platform</title>
+</head>
+<body>
+<h1 metal:fill-slot="body-title">AI Platform</h1>
+
+	<div metal:fill-slot="body-content">
+	<br>
+	<p><b>Select an area form the list below</b></p>
+		<div tal:repeat="area areas">
+		<a href="${request.resource_url(area)}">${area.name}</a> <span>${area.description}</span>
+		</div>
+
+	</div> 
+</body>
+</html>

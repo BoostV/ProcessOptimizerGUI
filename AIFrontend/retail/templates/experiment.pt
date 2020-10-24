@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      metal:use-macro="master">
+<head>
+ <title metal:fill-slot="head-title">${context.name}</title>
+</head>
+<body>
+	<div metal:fill-slot="body-content">
+		<div class="row">
+			<div class=col-sm>
+				<h1>${'Experiment: ' + context.name}</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm">
+				<h3>Description</h3>
+				<div tal:content="structure exp_desc">
+				</div>
+		
+			</div>
+			<div class="col-sm">
+				<h3>Next Experiment</h3>
+				<span tal:repeat="item next_exp">
+				<b>${item[0]}</b><br>
+				${item[1]}<br>
+				</span>
+			</div>
+			<div class="col-sm" tal:condition="not:exists:validationerror">
+				<h3>Handle bulk data</h3>
+				<form action="" method="POST" tal:condition="request.has_permission('retail.experiment.dl_data')">
+				<input type="submit" class="btn btn-link" name="dl_expdata" value="Download data">
+				
+				</form>
+				<span tal:condition="request.has_permission('retail.experiment.ul_data')"><b>Upload datafile</b></span>
+				<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data" tal:condition="request.has_permission('retail.experiment.ul_data')">
+
+    				<input id="mp3" name="mp3" type="file" value="" />
+    				<input class="btn btn-link" name="ul_expdata" type="submit" value="submit" />
+				</form>
+				<span tal:condition="request.has_permission('retail.use_experiment')"><b>Download multiple experiments</b></span>
+				<form action="" method="post" accept-charset="utf-8" tal:condition="request.has_permission('retail.experiment.ul_data')">
+
+    				<input id="exp_number" name="exp_number" type="number" value="" />
+    				<input class="btn btn-link" name="dl_multiple" type="submit" value="submit" />
+				</form>
+				
+			</div>
+			<div class="col-sm" tal:condition="exists:validationerror">
+				${validationerror} <br>
+				<a href="${request.resource_url(context)}">Back</a>
+				
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm" tal:condition="request.has_permission('retail.use_experiment')">
+				<h3>Input Data</h3>
+				<div tal:content="structure data_form">
+				</div>
+		
+			</div>
+		</div>
+
+	</div>
+
+
+	
+</body>
+</html>

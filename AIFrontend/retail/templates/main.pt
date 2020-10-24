@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:define-macro="">
+  <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css"/>
+	<link rel="stylesheet" href="/static/css/adjustment.css" type="text/css"/>
+	<link rel="stylesheet" href="${request.static_url('deform:static/css/form.css')}" 
+type="text/css" />
+	<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/deformstatic/scripts/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/deformstatic/scripts/deform.js"></script>
+    <metal:title metal:define-slot="head-title"/>
+  </head>
+  <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="breadcrumb">
+<div class="container">
+  <a class="navbar-brand" href="/">
+  </a>
+  
+    <ul class="navbar-nav mr-auto" tal:condition="request.authenticated_userid">
+      <li tal:repeat="item range(len(request.traversed))" class="nav-item active">
+        <a class="nav-link" href="${request.resource_url(request.root, *request.traversed[0:item +1])}">${request.traversed[item]} /</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav navbar-right">
+      <li class="nav-item" tal:condition="not:request.authenticated_userid">
+        <div class="login-container">
+          <form method="POST" action="${request.resource_url(request.root, 'login')}">
+          <input type="text" placeholder="Username" name="login">
+          <input type="password" placeholder="Password" name="password">
+          <button type="submit">Login</button>
+          </form>
+        </div>        
+      </li>
+      <li class="nav-item" tal:condition="request.authenticated_userid">
+      	<span class="navbar-text"><b>User: </b>${authenticated_user}</span>        
+      </li>
+      <li class="nav-item" tal:condition="request.authenticated_userid">
+      	<span>&nbsp</span><span>&nbsp</span>        
+      </li>    	
+      <li class="nav-item" tal:condition="request.authenticated_userid">
+      	<span class="navbar-text"><b>Navigation links:</b></span>        
+      </li>
+      <li class="nav-item" tal:condition="request.registry.content.istype(context, 'Experiment')">
+      	<a class="nav-link" href="${request.resource_url(context, 'config')}">Config</a>        
+      </li>
+      <li class="nav-item" tal:condition="request.registry.content.istype(context, 'Experiment')">
+      	<a class="nav-link" href="${request.resource_url(context, 'log')}">Log</a>        
+      </li>
+      <li class="nav-item" tal:condition="request.registry.content.istype(context, 'Area') and request.has_permission('retail.add_experiment')">
+      	<a class="nav-link" href="${request.resource_url(context, 'add_experiment')}">Add Experiment</a>        
+      </li>
+      <li class="nav-item" tal:condition="request.registry.content.istype(context, 'Experiment') and request.has_permission('retail.view_reports')">
+      	<a class="nav-link" href="${request.resource_url(context, 'reports')}">Reports</a>        
+      </li>
+      <li class="nav-item" tal:condition="request.authenticated_userid">
+      	<a class="nav-link" href="${request.resource_url(request.root, 'logout')}">Logout</a>        
+      </li>
+      
+    </ul>
+    </div>
+
+</nav>
+
+  <div class="container">
+  
+  
+    <metal:content metal:define-slot="body-content">CONTENT</metal:content>
+  </div>
+  </body>
+</html>
+
+
