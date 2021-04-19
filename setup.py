@@ -10,7 +10,7 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
 
 requires = [
     'plaster_pastedeploy',
-    'pyramid',
+    'pyramid==1.10.4',
     'pyramid_debugtoolbar',
     'substanced',
     'pyramid_tm==2.3',
@@ -20,7 +20,7 @@ requires = [
     'matplotlib',
     'mock',
     'RelStorage[postgresql]',
-    'ProcessOptimizer'
+    'ProcessOptimizer>=0.6.1'
     ]
 
 tests_require = [

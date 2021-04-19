@@ -214,7 +214,7 @@ class experiment_view(object):
         self.exp_min_out = []
         self.input_form = self.gen_input_form()
         if getattr(context['config'], 'configured', False) == True:                                               
-            for entry, value in zip(self.cfg.gen_opt_vars(self.cfg, self.request), context.optimizer.ask(n_points=1)[0]):
+            for entry, value in zip(self.cfg.gen_opt_vars(self.cfg, self.request), context.optimizer.ask(n_points=1)):
                 self.next_x.append([entry.name,value])
 
         self.r_dict = {'master': get_renderer('templates/main.pt').implementation(),
@@ -470,6 +470,7 @@ class config_view(object):
             self.context.__parent__.contains_catvar = False
         
         hyperparams = {'base_estimator':self.context.base_estimator,
+                       'lhs':True,
                        'acq_func':self.context.acq_func,
                        'n_initial_points':self.context.n_initial_points,
                        'acq_func_kwargs':{'kappa': self.context.kappa, 'xi': self.context.xi}}
